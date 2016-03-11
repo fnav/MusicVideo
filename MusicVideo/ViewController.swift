@@ -23,7 +23,6 @@ class ViewController: UIViewController {
         
         let alert = UIAlertController(title: (result), message: nil, preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
-            
         }
         
         alert.addAction(okAction)
