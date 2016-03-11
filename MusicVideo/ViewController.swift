@@ -29,9 +29,7 @@ class ViewController: UIViewController {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    private struct API {
-        static let DefaultsKey = "https://itunes.apple.com/us/rss/topmusicvideos/limit=10/json"
-    }
+   
 
 
     

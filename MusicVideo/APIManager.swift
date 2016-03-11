@@ -14,6 +14,7 @@ class APIManager {
     
     func loadData(urlString:String, completion: (result:String)->Void){
         
+        //config va a evitar que se guarden cosas en la cache
         let config = NSURLSessionConfiguration.ephemeralSessionConfiguration()
         
         let session = NSURLSession(configuration: config)
@@ -30,14 +31,14 @@ class APIManager {
             }else{
                 //print(data)
                 do{
-                    if let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as? [String: AnyObject]{
+                    if let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as? JSONDictionary{
                     
-                        print(json)
                         
                         let priority = DISPATCH_QUEUE_PRIORITY_HIGH
                         dispatch_async(dispatch_get_global_queue(priority, 0)){
                             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                 completion(result: "JSONSerialization successful")
+                                print(json)
                             })
                         }
                         
