@@ -26,8 +26,9 @@ class ViewController: UIViewController {
        // }
         
         for (index,item) in videos.enumerate(){
-             print("\(index+1): name = \(item.vName)")
-             print("     \(item.vPrice)")
+             print("- \(index+1): Song name = \(item.vName)")
+             print("            Price: \(item.vPrice)")
+             print("            Artist: \(item.vArtist)")
         }
     }
     
