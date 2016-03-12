@@ -12,7 +12,7 @@ import Foundation
 class APIManager {
 
     
-    func loadData(urlString:String, completion: (result:String)->Void){
+    func loadData(urlString:String, completion: (result:[Video])->Void){
         
         //config va a evitar que se guarden cosas en la cache
         let config = NSURLSessionConfiguration.ephemeralSessionConfiguration()
@@ -25,27 +25,33 @@ class APIManager {
         let task = session.dataTaskWithURL(url) { (data, response, error) -> Void in
             
             if error != nil {
-                dispatch_async(dispatch_get_main_queue()){
-                    completion(result: error!.localizedDescription)
-                }
+                    print(error!.localizedDescription)
             }else{
                 //print(data)
                 do{
-                    if let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as? JSONDictionary{
+                    if let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as? JSONDictionary,
+                        feed = json["feed"] as? JSONDictionary,
+                        entries = feed["entry"] as? JSONArray{
                     
-                        
-                        let priority = DISPATCH_QUEUE_PRIORITY_HIGH
-                        dispatch_async(dispatch_get_global_queue(priority, 0)){
-                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                                completion(result: "JSONSerialization successful")
-                                print(json)
-                            })
-                        }
-                        
+                        var videos = [Video]()
+                            for entry in entries{
+                                let entry = Video(data: entry as! JSONDictionary)
+                                videos.append(entry)
+                            }
+                        let i = videos.count
+                        print("iTunesApiManager - total count --> \(i)")
+                        print(" ")
+                            
+                        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+                            dispatch_async(dispatch_get_global_queue(priority,0)){
+                                dispatch_async(dispatch_get_main_queue()){
+                                    completion(result: videos)
+                                }
+                            }
                     }
                 }catch{
                     dispatch_async(dispatch_get_main_queue()){
-                        completion(result: "error in NSJSONSerialization")
+                        print("error in NSJSONSerialization")
                     }
                     
                 }

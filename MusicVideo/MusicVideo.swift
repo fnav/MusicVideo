@@ -42,12 +42,40 @@ class Video{
         return _vName
     }
     
+    var vRights: String{
+        return _vRights
+    }
+    
+    var vPrice: String{
+        return _vPrice
+    }
+    
     var vImageUrl: String{
         return _vImageUrl
     }
     
+    var vArtist: String{
+        return _vArtist
+    }
+    
     var vVideoUrl: String{
         return _vVideoUrl
+    }
+    
+    var vImid: String{
+        return _vImid
+    }
+    
+    var vGenre: String{
+        return _vGenre
+    }
+    
+    var vLinkToiTunes: String{
+        return _vLinkToiTunes
+    }
+    
+    var vReleaseDte: String{
+        return _vReleaseDte
     }
     
     
@@ -55,23 +83,24 @@ class Video{
         
         var stringValue = ""
         
-        var chainDivided = chain.componentsSeparatedByString("/")
+        let chainDivided = chain.componentsSeparatedByString("/")
         
         if (chainDivided.count>0)
         {
-            
-            let newPart = chainDivided.removeLast()
+            var chainDividedReverse = Array(chainDivided.reverse())
+
+            let newPart = chainDividedReverse.removeLast()
             let dataExtracted = data[newPart]
             
             switch dataExtracted{
             case let value as JSONDictionary:
-                retrieveValueFromChain(chainDivided.joinWithSeparator("/"),data: value)
+                stringValue = retrieveValueFromChain(chainDividedReverse.reverse().joinWithSeparator("/"),data: value)
             case let value as JSONArray:
-                if (chainDivided.count>0){
-                    let numberArray = chainDivided.removeLast()
+                if (chainDividedReverse.count>0){
+                    let numberArray = chainDividedReverse.removeLast()
                     if let numberFromString = Int(numberArray){
                         let newData = value[numberFromString]
-                        retrieveValueFromChain(chainDivided.joinWithSeparator("/"),data: newData)
+                       stringValue = retrieveValueFromChain(chainDividedReverse.reverse().joinWithSeparator("/"),data: newData)
                     }
                 }
             case let value as String:

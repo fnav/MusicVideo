@@ -19,14 +19,16 @@ class ViewController: UIViewController {
         
     }
     
-    func didLoadData(result:String){
+    func didLoadData(videos:[Video]){
         
-        let alert = UIAlertController(title: (result), message: nil, preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "Ok", style: .Default) { (action) -> Void in
+       // for item in videos{
+            //print("name = \(item.vName)")
+       // }
+        
+        for (index,item) in videos.enumerate(){
+             print("\(index+1): name = \(item.vName)")
+             print("     \(item.vPrice)")
         }
-        
-        alert.addAction(okAction)
-        self.presentViewController(alert, animated: true, completion: nil)
     }
     
    
