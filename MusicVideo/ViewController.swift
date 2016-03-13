@@ -29,6 +29,8 @@ class ViewController: UIViewController {
              print("- \(index+1): Song name = \(item.vName)")
              print("            Price: \(item.vPrice)")
              print("            Artist: \(item.vArtist)")
+             print("            ReleaseDate: \(item.vReleaseDte)")
+
         }
     }
     

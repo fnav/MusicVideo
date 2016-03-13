@@ -93,20 +93,20 @@ class Video{
             let dataExtracted = data[newPart]
             
             switch dataExtracted{
-            case let value as JSONDictionary:
-                stringValue = retrieveValueFromChain(chainDividedReverse.reverse().joinWithSeparator("/"),data: value)
-            case let value as JSONArray:
-                if (chainDividedReverse.count>0){
-                    let numberArray = chainDividedReverse.removeLast()
-                    if let numberFromString = Int(numberArray){
-                        let newData = value[numberFromString]
-                       stringValue = retrieveValueFromChain(chainDividedReverse.reverse().joinWithSeparator("/"),data: newData)
+                case let value as JSONDictionary:
+                    stringValue = retrieveValueFromChain(chainDividedReverse.reverse().joinWithSeparator("/"),data: value)
+                case let value as JSONArray:
+                    if (chainDividedReverse.count>0){
+                        let numberArray = chainDividedReverse.removeLast()
+                        if let numberFromString = Int(numberArray){
+                            let newData = value[numberFromString]
+                           stringValue = retrieveValueFromChain(chainDividedReverse.reverse().joinWithSeparator("/"),data: newData)
+                        }
                     }
-                }
-            case let value as String:
-                stringValue = value
-            default:
-                stringValue = ""
+                case let value as String:
+                    stringValue = value
+                default:
+                    stringValue = ""
             }
         }
         
