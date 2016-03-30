@@ -25,6 +25,8 @@ class Video{
     }
     //Data encapsulation
     
+    var vRank = 0
+    
     private var _vName:String
     private var _vRights:String
     private var _vPrice:String

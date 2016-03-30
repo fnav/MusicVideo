@@ -13,7 +13,18 @@ typealias JSONDictionary = [String: AnyObject]
 typealias JSONArray = Array <AnyObject>
 
 public struct API {
-    static let DefaultsKey = "https://itunes.apple.com/us/rss/topmusicvideos/limit=10/json"
+    //Max 200
+    static let maxNumVideos = 200
+    static var limit = 200{
+        willSet{
+            if(newValue>maxNumVideos){
+                self.limit = maxNumVideos
+            }else{
+                self.limit = newValue
+            }
+        }
+    }
+    static let DefaultsKey = "https://itunes.apple.com/us/rss/topmusicvideos/limit=\(limit)/json"
 }
 
 enum InternetStatus: CustomStringConvertible{

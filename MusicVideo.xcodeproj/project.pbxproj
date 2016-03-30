@@ -18,6 +18,7 @@
 		A16FF5BB1C91CE5500F8A5A7 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16FF5BA1C91CE5500F8A5A7 /* APIManager.swift */; };
 		A18A8B7B1C93338E00FEBBDF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18A8B7A1C93338E00FEBBDF /* Constants.swift */; };
 		A18A8B7D1C9334CF00FEBBDF /* MusicVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18A8B7C1C9334CF00FEBBDF /* MusicVideo.swift */; };
+		A18C0AE91CAC18BD00799AB4 /* MusicVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18C0AE81CAC18BD00799AB4 /* MusicVideoTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		A16FF5BA1C91CE5500F8A5A7 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		A18A8B7A1C93338E00FEBBDF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A18A8B7C1C9334CF00FEBBDF /* MusicVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicVideo.swift; sourceTree = "<group>"; };
+		A18C0AE81CAC18BD00799AB4 /* MusicVideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicVideoTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 		A16FF5B71C91CBD500F8A5A7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A18C0AE81CAC18BD00799AB4 /* MusicVideoTableViewCell.swift */,
 				A16FF58A1C91C67900F8A5A7 /* ViewController.swift */,
 			);
 			name = Controller;
@@ -325,6 +328,7 @@
 				A18A8B7D1C9334CF00FEBBDF /* MusicVideo.swift in Sources */,
 				A16FF5891C91C67900F8A5A7 /* AppDelegate.swift in Sources */,
 				A1246ED31C95F8A0005811B6 /* Reachability.m in Sources */,
+				A18C0AE91CAC18BD00799AB4 /* MusicVideoTableViewCell.swift in Sources */,
 				A18A8B7B1C93338E00FEBBDF /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
