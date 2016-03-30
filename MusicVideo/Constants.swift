@@ -15,7 +15,7 @@ typealias JSONArray = Array <AnyObject>
 public struct API {
     //Max 200
     static let maxNumVideos = 200
-    static var limit = 200{
+    static var limit = 100{
         willSet{
             if(newValue>maxNumVideos){
                 self.limit = maxNumVideos
