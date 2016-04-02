@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A11A47C71CAFD57F00FCE961 /* MusicVideoDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A47C61CAFD57F00FCE961 /* MusicVideoDetailVC.swift */; };
 		A1246ED31C95F8A0005811B6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A1246ED21C95F8A0005811B6 /* Reachability.m */; };
 		A16FF5891C91C67900F8A5A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16FF5881C91C67900F8A5A7 /* AppDelegate.swift */; };
 		A16FF58B1C91C67900F8A5A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16FF58A1C91C67900F8A5A7 /* ViewController.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A11A47C61CAFD57F00FCE961 /* MusicVideoDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicVideoDetailVC.swift; sourceTree = "<group>"; };
 		A1246ED01C95F89F005811B6 /* MusicVideo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MusicVideo-Bridging-Header.h"; sourceTree = "<group>"; };
 		A1246ED11C95F8A0005811B6 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		A1246ED21C95F8A0005811B6 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 		A16FF5B71C91CBD500F8A5A7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A11A47C61CAFD57F00FCE961 /* MusicVideoDetailVC.swift */,
 				A18C0AE81CAC18BD00799AB4 /* MusicVideoTableViewCell.swift */,
 				A16FF58A1C91C67900F8A5A7 /* ViewController.swift */,
 			);
@@ -330,6 +333,7 @@
 				A1246ED31C95F8A0005811B6 /* Reachability.m in Sources */,
 				A18C0AE91CAC18BD00799AB4 /* MusicVideoTableViewCell.swift in Sources */,
 				A18A8B7B1C93338E00FEBBDF /* Constants.swift in Sources */,
+				A11A47C71CAFD57F00FCE961 /* MusicVideoDetailVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
