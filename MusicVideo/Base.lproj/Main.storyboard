@@ -114,11 +114,11 @@
             </objects>
             <point key="canvasLocation" x="1094" y="175"/>
         </scene>
-        <!--Table View Controller-->
+        <!--SettingsTVC-->
         <scene sceneID="IOw-Bo-3sQ">
             <objects>
-                <tableViewController id="akT-e6-5yO" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="84" sectionHeaderHeight="28" sectionFooterHeight="28" id="Kjk-hT-phD">
+                <tableViewController id="akT-e6-5yO" customClass="SettingsTVC" customModule="MusicVideo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="84" sectionHeaderHeight="28" sectionFooterHeight="28" id="Kjk-hT-phD">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -280,6 +280,15 @@
                         </connections>
                     </tableView>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="APICnt" destination="zhM-q1-I4f" id="uqF-GR-iOR"/>
+                        <outlet property="aboutDisplay" destination="IxA-9I-k97" id="j3Y-S9-Lz0"/>
+                        <outlet property="bestImageDisplay" destination="pJ6-bW-nmg" id="njn-oS-ALg"/>
+                        <outlet property="feedBackDisplay" destination="g2b-LO-PpD" id="e0V-pW-2bI"/>
+                        <outlet property="securityDisplay" destination="IqD-fA-EHf" id="WkC-eZ-wLD"/>
+                        <outlet property="sliderCount" destination="WH6-hY-dCM" id="EZT-nD-h54"/>
+                        <outlet property="touchID" destination="dFN-sj-WhB" id="w3k-Ve-cgl"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cgo-Ib-mUZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

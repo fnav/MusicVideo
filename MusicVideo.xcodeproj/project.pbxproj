@@ -20,6 +20,7 @@
 		A18A8B7B1C93338E00FEBBDF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18A8B7A1C93338E00FEBBDF /* Constants.swift */; };
 		A18A8B7D1C9334CF00FEBBDF /* MusicVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18A8B7C1C9334CF00FEBBDF /* MusicVideo.swift */; };
 		A18C0AE91CAC18BD00799AB4 /* MusicVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18C0AE81CAC18BD00799AB4 /* MusicVideoTableViewCell.swift */; };
+		A198C11B1CB18C8500F45803 /* SettingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198C11A1CB18C8500F45803 /* SettingsTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		A18A8B7A1C93338E00FEBBDF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A18A8B7C1C9334CF00FEBBDF /* MusicVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicVideo.swift; sourceTree = "<group>"; };
 		A18C0AE81CAC18BD00799AB4 /* MusicVideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicVideoTableViewCell.swift; sourceTree = "<group>"; };
+		A198C11A1CB18C8500F45803 /* SettingsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 		A16FF5B71C91CBD500F8A5A7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A198C11A1CB18C8500F45803 /* SettingsTVC.swift */,
 				A11A47C61CAFD57F00FCE961 /* MusicVideoDetailVC.swift */,
 				A18C0AE81CAC18BD00799AB4 /* MusicVideoTableViewCell.swift */,
 				A16FF58A1C91C67900F8A5A7 /* ViewController.swift */,
@@ -327,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A16FF5BB1C91CE5500F8A5A7 /* APIManager.swift in Sources */,
+				A198C11B1CB18C8500F45803 /* SettingsTVC.swift in Sources */,
 				A16FF58B1C91C67900F8A5A7 /* ViewController.swift in Sources */,
 				A18A8B7D1C9334CF00FEBBDF /* MusicVideo.swift in Sources */,
 				A16FF5891C91C67900F8A5A7 /* AppDelegate.swift in Sources */,
