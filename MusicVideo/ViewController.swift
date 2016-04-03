@@ -26,9 +26,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
      //   tableView.rowHeight = 139.0
         
         // Do any additional setup after loading the view, typically from a nib.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reachabilityStatusChanged", name: "ReachStatusChanged", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.reachabilityStatusChanged), name: "ReachStatusChanged", object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredFontChange", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.preferredFontChange), name: UIContentSizeCategoryDidChangeNotification, object: nil)
         
         reachabilityStatusChanged()
         
@@ -80,6 +80,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
         }
+    }
+    
+    func preferredFontChange(){
+        print("font has changed")
     }
     
     func didLoadData(videos:[Video]){
