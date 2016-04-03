@@ -10,8 +10,19 @@ import UIKit
 
 class MusicVideoDetailVC: UIViewController {
 
+    var video:Video!
+    
+    //MARK: Outlets
+    @IBOutlet weak var vName: UILabel!
+    @IBOutlet weak var videoImage: UIImageView!
+    @IBOutlet weak var vGenre: UILabel!
+    @IBOutlet weak var vPrice: UILabel!
+    @IBOutlet weak var vRights: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        updateDetailView()
 
         // Do any additional setup after loading the view.
     }
@@ -19,6 +30,23 @@ class MusicVideoDetailVC: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func updateDetailView(){
+        
+            title = video.vArtist
+            vName.text = video.vName
+            vPrice.text = video.vPrice
+            vRights.text = video.vRights
+            vGenre.text = video.vGenre
+            
+            if video.vImageData != nil {
+                videoImage.image = UIImage(data: video.vImageData!)
+            }
+            else {
+                videoImage.image = UIImage(named: "imageNotAvailable")
+            }
+       
     }
     
 

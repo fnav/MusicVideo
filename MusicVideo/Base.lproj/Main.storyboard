@@ -83,7 +83,7 @@
                                             <outlet property="musicImage" destination="EGN-Mg-Le0" id="wz0-fs-wiy"/>
                                             <outlet property="musicTitle" destination="TVn-1M-QKA" id="1C7-av-xTz"/>
                                             <outlet property="rank" destination="rtF-y7-2mX" id="uxq-VM-xvM"/>
-                                            <segue destination="hwp-3X-YEc" kind="show" id="7V1-Ul-iDo"/>
+                                            <segue destination="hwp-3X-YEc" kind="show" identifier="music detail" id="7V1-Ul-iDo"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -118,7 +118,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZZj-KN-8mU">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZZj-KN-8mU">
                                 <rect key="frame" x="1" y="132" width="599" height="282"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="vName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ub4-0J-qhY">
@@ -188,6 +188,13 @@
                         </barButtonItem>
                     </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
+                    <connections>
+                        <outlet property="vGenre" destination="fzg-ME-ith" id="tFf-Rl-QUr"/>
+                        <outlet property="vName" destination="Ub4-0J-qhY" id="aUK-RQ-lhl"/>
+                        <outlet property="vPrice" destination="v7L-LU-tI3" id="duC-pe-4Pl"/>
+                        <outlet property="vRights" destination="rQs-D3-Xpd" id="C7O-gV-2zB"/>
+                        <outlet property="videoImage" destination="ZZj-KN-8mU" id="n3f-dx-dUd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mVZ-3W-Aci" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
