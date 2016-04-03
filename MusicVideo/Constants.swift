@@ -27,6 +27,11 @@ public struct API {
     static let DefaultsKey = "https://itunes.apple.com/us/rss/topmusicvideos/limit=\(limit)/json"
 }
 
+public struct NSUserDefaultsKeys{
+    static let securitySettings = "SecSetting"
+    static let apiCNT = "APICNT"
+}
+
 enum InternetStatus: CustomStringConvertible{
     case WIFI
     case NOACCESS

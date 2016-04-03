@@ -25,9 +25,28 @@ class SettingsTVC: UITableViewController {
         //Lo he cambiado en storyboard pero sino podrías poner (para que no se pueda hacer scroll):
         // tableView.alwaysBounceVertical = false
         
+        self.title = "Settings"
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.preferredFontChange), name: UIContentSizeCategoryDidChangeNotification, object: nil)
         
+        touchID.on = NSUserDefaults.standardUserDefaults().boolForKey(NSUserDefaultsKeys.securitySettings)
+        if let theValue = NSUserDefaults.standardUserDefaults().objectForKey(NSUserDefaultsKeys.apiCNT){
+            APICnt.text = "\(theValue)"
+            sliderCount.value = Float(theValue as! NSNumber)
+        }
+            
         
+        
+    }
+    
+    @IBAction func valueChanged(sender: UISlider) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(Int(sliderCount.value),forKey: NSUserDefaultsKeys.apiCNT)
+        APICnt.text = "\(Int(sliderCount.value))"
+    }
+    @IBAction func touchIDSec(sender: UISwitch) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setBool(touchID.on, forKey: NSUserDefaultsKeys.securitySettings)
     }
     
     func preferredFontChange(){
