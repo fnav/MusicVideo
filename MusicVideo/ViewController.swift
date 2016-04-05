@@ -155,7 +155,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 let video = videos[indexpath.row]
                 let dvc = segue.destinationViewController as! MusicVideoDetailVC
                 dvc.video = video
-                
             }
             
         }

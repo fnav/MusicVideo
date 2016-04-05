@@ -416,6 +416,9 @@
                     <toolbarItems>
                         <barButtonItem systemItem="play" id="SOU-Wm-fkT">
                             <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="playVideo:" destination="hwp-3X-YEc" id="vax-7t-XMA"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="O0K-al-o4N"/>
                         <barButtonItem systemItem="action" id="sSd-ne-CAJ">
