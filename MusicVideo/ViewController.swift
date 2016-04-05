@@ -132,7 +132,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     private struct storyBoard{
         static let cellReuseIdentifier = "cell"
-        static let segueIdentifier = "music detail"
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -147,14 +146,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: UITableViewDelegate
    
     //MARK: - Navigation
+    private struct identifiers {
+        static let stringSegueIdentifier = "music detail"
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == storyBoard.segueIdentifier
+        if let identifier = segue.identifier
         {
-            if let indexpath = tableView.indexPathForSelectedRow {
-                let video = videos[indexpath.row]
-                let dvc = segue.destinationViewController as! MusicVideoDetailVC
-                dvc.video = video
+            switch identifier{
+            case identifiers.stringSegueIdentifier:
+                if let dvc = segue.destinationViewController as? MusicVideoDetailVC {
+                    if let indexpath = tableView.indexPathForSelectedRow {
+                        let video = videos[indexpath.row]
+                        dvc.video = video
+                    }
+                }
+            default: break
+
             }
             
         }
