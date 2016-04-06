@@ -22,11 +22,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return refreshControl
     }()
     
-    let maxNumVideos = 200
     var limit:Int{
         set{
-            if(newValue>maxNumVideos){
-                self.limit = maxNumVideos
+            if(newValue>API.maxNumVideos){
+                self.limit = API.maxNumVideos
             }else{
                 self.limit = newValue
             }
@@ -36,14 +35,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             {
                 return Int(limite as! NSNumber)
             }else{
-                return 20
+                return API.defaultNumVideos
             }
         }
         
     }
 
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
