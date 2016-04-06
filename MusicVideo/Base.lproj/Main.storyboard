@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -19,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="139" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="udC-16-4Vh">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="139" id="otA-KI-LB5" customClass="MusicVideoTableViewCell" customModule="MusicVideo" customModuleProvider="target">
@@ -91,10 +92,10 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="udC-16-4Vh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="CjR-65-W01"/>
-                            <constraint firstItem="udC-16-4Vh" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Qln-8Z-SmD"/>
-                            <constraint firstAttribute="trailing" secondItem="udC-16-4Vh" secondAttribute="trailing" id="Ul4-no-Nfa"/>
-                            <constraint firstItem="udC-16-4Vh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="rOh-8w-VTT"/>
+                            <constraint firstAttribute="trailing" secondItem="udC-16-4Vh" secondAttribute="trailing" id="FjT-ka-qsP"/>
+                            <constraint firstItem="udC-16-4Vh" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="44" id="JuP-nP-Gfr"/>
+                            <constraint firstItem="udC-16-4Vh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="nrw-3Q-sJu"/>
+                            <constraint firstItem="udC-16-4Vh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="w9O-QG-UCa"/>
                         </constraints>
                     </view>
                     <toolbarItems>
@@ -242,17 +243,29 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhM-q1-I4f">
-                                                    <rect key="frame" x="8" y="8" width="584" height="75"/>
+                                                    <rect key="frame" x="278" y="8" width="314" height="67"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top Videos number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ba-kI-Lko">
+                                                    <rect key="frame" x="8" y="8" width="262" height="67"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="262" id="Y36-U8-UDa"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="zhM-q1-I4f" firstAttribute="leading" secondItem="wvt-2t-brg" secondAttribute="leadingMargin" id="Ajn-gd-bvQ"/>
-                                                <constraint firstItem="zhM-q1-I4f" firstAttribute="top" secondItem="wvt-2t-brg" secondAttribute="topMargin" id="CK9-pL-3Rr"/>
-                                                <constraint firstItem="zhM-q1-I4f" firstAttribute="trailing" secondItem="wvt-2t-brg" secondAttribute="trailingMargin" id="axm-IB-EtI"/>
-                                                <constraint firstAttribute="bottom" secondItem="zhM-q1-I4f" secondAttribute="bottom" id="yQx-Nb-0y2"/>
+                                                <constraint firstItem="2Ba-kI-Lko" firstAttribute="bottom" secondItem="wvt-2t-brg" secondAttribute="bottomMargin" id="H3J-z8-xFI"/>
+                                                <constraint firstItem="2Ba-kI-Lko" firstAttribute="leading" secondItem="wvt-2t-brg" secondAttribute="leadingMargin" id="Mtt-4S-KIp"/>
+                                                <constraint firstItem="2Ba-kI-Lko" firstAttribute="baseline" secondItem="zhM-q1-I4f" secondAttribute="baseline" id="jfC-lM-7Qd"/>
+                                                <constraint firstItem="zhM-q1-I4f" firstAttribute="trailing" secondItem="wvt-2t-brg" secondAttribute="trailingMargin" id="sWp-La-lfi"/>
+                                                <constraint firstItem="2Ba-kI-Lko" firstAttribute="firstBaseline" secondItem="zhM-q1-I4f" secondAttribute="firstBaseline" id="tNL-fA-Nhc"/>
+                                                <constraint firstItem="2Ba-kI-Lko" firstAttribute="top" secondItem="wvt-2t-brg" secondAttribute="topMargin" id="teo-lp-7f4"/>
+                                                <constraint firstItem="zhM-q1-I4f" firstAttribute="leading" secondItem="2Ba-kI-Lko" secondAttribute="trailing" constant="8" symbolic="YES" id="vuL-i3-RFg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -451,6 +464,7 @@
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="QAQ-ej-G4g">
                         <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </toolbar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="EAv-L2-mHB"/>

@@ -16,6 +16,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var tableView: UITableView!
     
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(ViewController.handleRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        return refreshControl
+    }()
+    
+    let maxNumVideos = 200
+    var limit:Int{
+        set{
+            if(newValue>maxNumVideos){
+                self.limit = maxNumVideos
+            }else{
+                self.limit = newValue
+            }
+        }
+        get{
+            if let limite = (NSUserDefaults.standardUserDefaults().objectForKey(NSUserDefaultsKeys.apiCNT))
+            {
+                return Int(limite as! NSNumber)
+            }else{
+                return 20
+            }
+        }
+        
+    }
+
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +52,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //Establecemos la delegación del tableView
         tableView.dataSource = self
         tableView.delegate = self
+        self.tableView.addSubview(self.refreshControl)
+
      //   tableView.rowHeight = 139.0
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -32,6 +63,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         reachabilityStatusChanged()
         
+    }
+    
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        // Do some reloading of data and update the table view's data source
+        // Fetch more objects from a web service, for example...
+        
+        runAPI()
+        
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "E, dd MMM yyyy HH:mm:ss"
+        let refreshDte = formatter.stringFromDate(NSDate())
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "\(refreshDte)")
+        
+        refreshControl.endRefreshing()
     }
     
     func reachabilityStatusChanged()
@@ -107,7 +153,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func runAPI(){
         
         let api = APIManager()
-        api.loadData(API.DefaultsKey,completion:didLoadData)
+        api.loadData("https://itunes.apple.com/us/rss/topmusicvideos/limit=\(self.limit)/json",completion:didLoadData)
 
     }
     // Is called just as the object is about to be deallocated

@@ -14,17 +14,7 @@ typealias JSONArray = Array <AnyObject>
 
 public struct API {
     //Max 200
-    static let maxNumVideos = 200
-    static var limit = 100{
-        willSet{
-            if(newValue>maxNumVideos){
-                self.limit = maxNumVideos
-            }else{
-                self.limit = newValue
-            }
-        }
-    }
-    static let DefaultsKey = "https://itunes.apple.com/us/rss/topmusicvideos/limit=\(limit)/json"
+   //    static var DefaultsKey = "https://itunes.apple.com/us/rss/topmusicvideos/limit=\(limit)/json"
 }
 
 public struct NSUserDefaultsKeys{
