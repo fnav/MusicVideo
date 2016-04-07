@@ -444,6 +444,9 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="O0K-al-o4N"/>
                         <barButtonItem systemItem="action" id="sSd-ne-CAJ">
                             <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="socialMedia:" destination="hwp-3X-YEc" id="0Ew-AG-aXi"/>
+                            </connections>
                         </barButtonItem>
                     </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>

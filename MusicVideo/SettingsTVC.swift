@@ -59,7 +59,6 @@ class SettingsTVC: UITableViewController {
     func preferredFontChange(){
         
         self.tableView.reloadData()
-        
 //        aboutDisplay.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
 //        feedBackDisplay.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
 //        securityDisplay.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
