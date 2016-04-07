@@ -89,11 +89,17 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="W26-Re-G6A">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                                <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="udC-16-4Vh" secondAttribute="trailing" id="FjT-ka-qsP"/>
                             <constraint firstItem="udC-16-4Vh" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="44" id="JuP-nP-Gfr"/>
+                            <constraint firstItem="W26-Re-G6A" firstAttribute="centerX" secondItem="udC-16-4Vh" secondAttribute="centerX" id="Np7-ke-qYi"/>
+                            <constraint firstItem="W26-Re-G6A" firstAttribute="centerY" secondItem="udC-16-4Vh" secondAttribute="centerY" id="PY4-7p-ri0"/>
                             <constraint firstItem="udC-16-4Vh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="nrw-3Q-sJu"/>
                             <constraint firstItem="udC-16-4Vh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="w9O-QG-UCa"/>
                         </constraints>
@@ -102,12 +108,13 @@
                         <barButtonItem title="Settings" id="glX-VO-sHL">
                             <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="akT-e6-5yO" kind="show" id="rr4-Lp-K2N"/>
+                                <segue destination="akT-e6-5yO" kind="show" identifier="settingsTVC" id="rr4-Lp-K2N"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Top Videos" id="ayV-4V-5SJ"/>
                     <connections>
+                        <outlet property="spinner" destination="W26-Re-G6A" id="SJo-yc-r0t"/>
                         <outlet property="tableView" destination="udC-16-4Vh" id="XjK-he-QzG"/>
                     </connections>
                 </viewController>
@@ -254,7 +261,7 @@
                                                         <constraint firstAttribute="width" constant="262" id="Y36-U8-UDa"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -279,7 +286,8 @@
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="10" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="WH6-hY-dCM">
                                                     <rect key="frame" x="46" y="27" width="509" height="31"/>
                                                     <connections>
-                                                        <action selector="valueChanged:" destination="akT-e6-5yO" eventType="valueChanged" id="ixe-OY-bRX"/>
+                                                        <action selector="finishedSliderValueChanged:" destination="akT-e6-5yO" eventType="touchUpInside" id="inN-1W-c3Z"/>
+                                                        <action selector="sliderValueChanged:" destination="akT-e6-5yO" eventType="valueChanged" id="cYu-dC-jLx"/>
                                                     </connections>
                                                 </slider>
                                             </subviews>

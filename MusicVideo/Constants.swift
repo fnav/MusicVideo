@@ -12,11 +12,12 @@ typealias JSONDictionary = [String: AnyObject]
 
 typealias JSONArray = Array <AnyObject>
 
-public struct API {
+public struct MVideoAPI {
     //Max 200
     static let maxNumVideos = 200
-    static let defaultNumVideos = 20
-   //    static var DefaultsKey = "https://itunes.apple.com/us/rss/topmusicvideos/limit=\(limit)/json"
+    static let defaultLimitVideoCnt = 10
+    static var topMusicVideos = "https://itunes.apple.com/us/rss/topmusicvideos"
+
 }
 
 public struct NSUserDefaultsKeys{

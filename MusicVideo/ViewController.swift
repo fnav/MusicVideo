@@ -8,12 +8,55 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SettingsTVCDataSource{
 
     @IBOutlet weak var displayLabel: UILabel!
     
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
+    //        defaults.setObject(Int(sliderCount.value),forKey: NSUserDefaultsKeys.apiCNT)
+    //        APICnt.text = "\(Int(sliderCount.value))"
+    
     var videos = [Video]()
     
+    var _limit:Int?
+    var needReloadData = false
+    
+    var limit:Int{
+        set{
+            if(_limit != newValue){
+                if(newValue>MVideoAPI.maxNumVideos){
+                    print("Limite puesto a \(newValue>MVideoAPI.maxNumVideos) por defecto")
+                    _limit = MVideoAPI.maxNumVideos
+                }else{
+                    print("Limite puesto a \(newValue)")
+                    _limit = newValue
+                }
+                needReloadData = true
+            }
+            
+            defaults.setObject(_limit, forKey:NSUserDefaultsKeys.apiCNT)
+        }
+        get{
+            var limitNum = 0
+            //If it's the first time limit is accesed try get from NSUserDefaults. If not, set a default value from MusicVideoAPIConstants
+            if let limitCnt = _limit{
+                limitNum = limitCnt
+            }else{
+                if let limite = (defaults.objectForKey(NSUserDefaultsKeys.apiCNT))
+                {
+                    limitNum = Int(limite as! NSNumber)
+                }else{
+                    limitNum = MVideoAPI.defaultLimitVideoCnt
+                }
+                _limit = limitNum
+            }
+            return limitNum
+        }
+        
+    }
+    
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     
     lazy var refreshControl: UIRefreshControl = {
@@ -22,26 +65,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return refreshControl
     }()
     
-    var limit:Int{
-        set{
-            if(newValue>API.maxNumVideos){
-                self.limit = API.maxNumVideos
-            }else{
-                self.limit = newValue
-            }
-        }
-        get{
-            if let limite = (NSUserDefaults.standardUserDefaults().objectForKey(NSUserDefaultsKeys.apiCNT))
-            {
-                return Int(limite as! NSNumber)
-            }else{
-                return API.defaultNumVideos
-            }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //Check if reloadData is necessary
+        if(needReloadData){
+            runAPI()
         }
         
+        
     }
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,6 +85,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableView.addSubview(self.refreshControl)
 
      //   tableView.rowHeight = 139.0
+        //Navigation controller color
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.redColor()]
+
         
         // Do any additional setup after loading the view, typically from a nib.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.reachabilityStatusChanged), name: "ReachStatusChanged", object: nil)
@@ -73,8 +109,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let refreshDte = formatter.stringFromDate(NSDate())
         
         refreshControl.attributedTitle = NSAttributedString(string: "\(refreshDte)")
-        
-        refreshControl.endRefreshing()
     }
     
     func reachabilityStatusChanged()
@@ -143,14 +177,34 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
              print("            ReleaseDate: \(item.vReleaseDte)")
 
         }
+        
+        
+        //Stop either resfresh or spinner
+        if (refreshControl.refreshing){
+            refreshControl.endRefreshing()
+        }else{
+            self.spinner.stopAnimating()
+        }
+        needReloadData = false
+        
+        //Change Navigation controller title
+        title = ("The iTunes Top \(limit) Music Videos")
+
+        
         //recargo la tabla para que muestre los datos
         tableView.reloadData()
     }
     
     func runAPI(){
         
+        //If refreshControl is stopped, show spinner instead
+        if (!self.refreshControl.refreshing) {
+            self.spinner.startAnimating()
+        }
+        
         let api = APIManager()
-        api.loadData("https://itunes.apple.com/us/rss/topmusicvideos/limit=\(self.limit)/json",completion:didLoadData)
+        let url = "https://itunes.apple.com/us/rss/topmusicvideos/limit=\(self.limit)/json"
+        api.loadData(url,completion:didLoadData)
 
     }
     // Is called just as the object is about to be deallocated
@@ -190,25 +244,37 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
    
     //MARK: - Navigation
     private struct identifiers {
-        static let stringSegueIdentifier = "music detail"
+        static let musicDetailIdentifier = "music detail"
+        static let settingsIdentifier = "settingsTVC"
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let identifier = segue.identifier
         {
             switch identifier{
-            case identifiers.stringSegueIdentifier:
+            case identifiers.musicDetailIdentifier:
                 if let dvc = segue.destinationViewController as? MusicVideoDetailVC {
                     if let indexpath = tableView.indexPathForSelectedRow {
                         let video = videos[indexpath.row]
                         dvc.video = video
                     }
                 }
+            case identifiers.settingsIdentifier:
+                if let svc = segue.destinationViewController as? SettingsTVC {
+                    svc.dataSource = self
+                }
             default: break
 
             }
             
         }
+    }
+    
+    //MARK: SettingsTVCDataSource methods
+    
+    func sliderCnt(cnt: Int, sender: SettingsTVC) {
+        print("Slider cambiado a \(cnt)")
+        self.limit = cnt
     }
 
     
