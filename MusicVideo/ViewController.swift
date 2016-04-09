@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SettingsTVCDataSource{
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SettingsTVCDataSource,UISearchResultsUpdating{
 
     @IBOutlet weak var displayLabel: UILabel!
     
@@ -18,6 +18,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //        APICnt.text = "\(Int(sliderCount.value))"
     
     var videos = [Video]()
+    var filterSearch = [Video]()
+    
+        //Specify nil if you want to display the search results in the same view controller that displays your searchable content.
+    let resultSearchController = UISearchController(searchResultsController: nil)
+
     
     var _limit:Int?
     var needReloadData = false
@@ -191,6 +196,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         title = ("The iTunes Top \(limit) Music Videos")
 
         
+        // Setup the Search Controller
+        
+        resultSearchController.searchResultsUpdater = self
+        
+        definesPresentationContext = true
+        
+        resultSearchController.dimsBackgroundDuringPresentation = false
+        
+        resultSearchController.searchBar.placeholder = "Search for Artist, Name or Rank"
+        
+        resultSearchController.searchBar.searchBarStyle = UISearchBarStyle.Prominent
+        
+        // add the search bar to your tableview
+        tableView.tableHeaderView = resultSearchController.searchBar
+
+        
         //recargo la tabla para que muestre los datos
         tableView.reloadData()
     }
@@ -223,19 +244,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return videos.count
-    }
+        
+        if resultSearchController.active {
+            return filterSearch.count
+        }
+        return videos.count    }
     
     
-    private struct storyBoard{
+        private struct storyBoard{
         static let cellReuseIdentifier = "cell"
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(storyBoard.cellReuseIdentifier,forIndexPath: indexPath) as! MusicVideoTableViewCell
         
-        cell.video = videos[indexPath.row]
-        
+        if resultSearchController.active {
+            cell.video = filterSearch[indexPath.row]
+        } else {
+            cell.video = videos[indexPath.row]
+        }
         return cell
         
     }
@@ -255,7 +282,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             case identifiers.musicDetailIdentifier:
                 if let dvc = segue.destinationViewController as? MusicVideoDetailVC {
                     if let indexpath = tableView.indexPathForSelectedRow {
-                        let video = videos[indexpath.row]
+                        
+                        let video: Video
+                        if resultSearchController.active {
+                            video = filterSearch[indexpath.row]
+                            
+                        } else {
+                            video = videos[indexpath.row]
+                        }
+                        
                         dvc.video = video
                     }
                 }
@@ -276,8 +311,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print("Slider cambiado a \(cnt)")
         self.limit = cnt
     }
-
     
+    //MARK UISearchResultsUpdating delegate:
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    searchController.searchBar.text!.lowercaseString
+    filterSearch(searchController.searchBar.text!)
+    }
+    
+    func filterSearch(searchText: String) {
+        filterSearch = videos.filter { videos in
+            return videos.vArtist.lowercaseString.containsString(searchText.lowercaseString) || videos.vName.lowercaseString.containsString(searchText.lowercaseString) || "\(videos.vRank)".lowercaseString.containsString(searchText.lowercaseString)
+        }
+        
+        tableView.reloadData()
+    }
+
+
+
 
 }
 
