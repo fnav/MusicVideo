@@ -222,8 +222,11 @@
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4bs-91-S9e">
                                                     <rect key="frame" x="535" y="31" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="imageQuality:" destination="akT-e6-5yO" eventType="valueChanged" id="DNq-qD-7AG"/>
+                                                    </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best image cuality" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJ6-bW-nmg">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best image quality" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJ6-bW-nmg">
                                                     <rect key="frame" x="8" y="26" width="255" height="41"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="255" id="c89-tT-xhJ"/>
@@ -310,6 +313,7 @@
                     <connections>
                         <outlet property="APICnt" destination="zhM-q1-I4f" id="uqF-GR-iOR"/>
                         <outlet property="aboutDisplay" destination="IxA-9I-k97" id="j3Y-S9-Lz0"/>
+                        <outlet property="bestImage" destination="4bs-91-S9e" id="Ua8-tz-nVK"/>
                         <outlet property="bestImageDisplay" destination="pJ6-bW-nmg" id="njn-oS-ALg"/>
                         <outlet property="feedBackDisplay" destination="g2b-LO-PpD" id="e0V-pW-2bI"/>
                         <outlet property="securityDisplay" destination="IqD-fA-EHf" id="WkC-eZ-wLD"/>

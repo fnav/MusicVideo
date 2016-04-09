@@ -9,13 +9,10 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SettingsTVCDataSource,UISearchResultsUpdating{
+    
+    var musicVideoBrain = MusicVideoBrain.sharedInstance
 
     @IBOutlet weak var displayLabel: UILabel!
-    
-    let defaults = NSUserDefaults.standardUserDefaults()
-    
-    //        defaults.setObject(Int(sliderCount.value),forKey: NSUserDefaultsKeys.apiCNT)
-    //        APICnt.text = "\(Int(sliderCount.value))"
     
     var videos = [Video]()
     var filterSearch = [Video]()
@@ -24,42 +21,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let resultSearchController = UISearchController(searchResultsController: nil)
 
     
-    var _limit:Int?
-    var needReloadData = false
-    
     var limit:Int{
         set{
-            if(_limit != newValue){
-                if(newValue>MVideoAPI.maxNumVideos){
-                    print("Limite puesto a \(newValue>MVideoAPI.maxNumVideos) por defecto")
-                    _limit = MVideoAPI.maxNumVideos
-                }else{
-                    print("Limite puesto a \(newValue)")
-                    _limit = newValue
-                }
+            if(newValue != musicVideoBrain.limit){
+                musicVideoBrain.limit = newValue
                 needReloadData = true
             }
-            
-            defaults.setObject(_limit, forKey:NSUserDefaultsKeys.apiCNT)
         }
         get{
-            var limitNum = 0
-            //If it's the first time limit is accesed try get from NSUserDefaults. If not, set a default value from MusicVideoAPIConstants
-            if let limitCnt = _limit{
-                limitNum = limitCnt
-            }else{
-                if let limite = (defaults.objectForKey(NSUserDefaultsKeys.apiCNT))
-                {
-                    limitNum = Int(limite as! NSNumber)
-                }else{
-                    limitNum = MVideoAPI.defaultLimitVideoCnt
-                }
-                _limit = limitNum
-            }
-            return limitNum
+            return musicVideoBrain.limit
         }
-        
     }
+    var needReloadData = false
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
@@ -297,6 +270,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             case identifiers.settingsIdentifier:
                 if let svc = segue.destinationViewController as? SettingsTVC {
                     svc.dataSource = self
+                    
+                    //Set initial values:
+                    svc.sliderCnt = Float(musicVideoBrain.limit)
+                    svc.touchIDisOn = musicVideoBrain.security
+                    svc.imageBestQualityisOn = musicVideoBrain.bestQuality
+                    
                 }
             default: break
 
@@ -306,10 +285,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     //MARK: SettingsTVCDataSource methods
-    
     func sliderCnt(cnt: Int, sender: SettingsTVC) {
         print("Slider cambiado a \(cnt)")
         self.limit = cnt
+    }
+    
+    func qualityImageSwitched(isHigh: Bool, sender: SettingsTVC) {
+        self.musicVideoBrain.bestQuality = isHigh
+    }
+    
+    func securitySwitched(isOn: Bool, sender: SettingsTVC) {
+        self.musicVideoBrain.security = isOn
     }
     
     //MARK UISearchResultsUpdating delegate:
@@ -325,8 +311,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         tableView.reloadData()
     }
-
-
 
 
 }

@@ -21,8 +21,9 @@ public struct MVideoAPI {
 }
 
 public struct NSUserDefaultsKeys{
-    static let securitySettings = "SecSetting"
+    static let securitySettings = "SecSettings"
     static let apiCNT = "APICNT"
+    static let bestImageQuality = "QualitySettings"
 }
 
 enum InternetStatus: CustomStringConvertible{

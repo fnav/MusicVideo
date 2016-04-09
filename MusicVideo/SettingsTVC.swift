@@ -12,6 +12,9 @@ import MessageUI
 
 protocol SettingsTVCDataSource: class {
     func sliderCnt(cnt: Int,sender: SettingsTVC)
+    
+    func securitySwitched(isOn:Bool,sender:SettingsTVC)
+    func qualityImageSwitched(isHigh:Bool,sender:SettingsTVC)
 }
 
 class SettingsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
@@ -25,7 +28,12 @@ class SettingsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var bestImageDisplay: UILabel!
     @IBOutlet weak var APICnt: UILabel!
     @IBOutlet weak var sliderCount: UISlider!
+    @IBOutlet weak var bestImage: UISwitch!
     
+    //User have to set this values in order to appear on screen, if not we'll put default values
+    var touchIDisOn:Bool?
+    var imageBestQualityisOn:Bool?
+    var sliderCnt:Float?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,12 +44,18 @@ class SettingsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.preferredFontChange), name: UIContentSizeCategoryDidChangeNotification, object: nil)
         
-        touchID.on = NSUserDefaults.standardUserDefaults().boolForKey(NSUserDefaultsKeys.securitySettings)
-        if let theValue = NSUserDefaults.standardUserDefaults().objectForKey(NSUserDefaultsKeys.apiCNT){
-            APICnt.text = "\(theValue)"
-            sliderCount.value = Float(theValue as! NSNumber)
-        }
-            
+        //Settings initial parameters
+        touchID.on = touchIDisOn ?? false
+        bestImage.on = imageBestQualityisOn ?? false
+        sliderCount.value = (sliderCnt ?? 10.0)
+        APICnt.text = "\(Int(sliderCount.value))"
+        
+//        touchID.on = NSUserDefaults.standardUserDefaults().boolForKey(NSUserDefaultsKeys.securitySettings)
+//        if let theValue = NSUserDefaults.standardUserDefaults().objectForKey(NSUserDefaultsKeys.apiCNT){
+//            APICnt.text = "\(theValue)"
+//            sliderCount.value = Float(theValue as! NSNumber)
+//        }
+        
         
     }
     
@@ -52,9 +66,12 @@ class SettingsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
     @IBAction func sliderValueChanged(sender: UISlider) {
         APICnt.text = ("\(Int(sender.value))")
     }
+    
+    @IBAction func imageQuality(sender: AnyObject) {
+        self.dataSource?.qualityImageSwitched(bestImage.on, sender: self)
+    }
     @IBAction func touchIDSec(sender: UISwitch) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setBool(touchID.on, forKey: NSUserDefaultsKeys.securitySettings)
+        self.dataSource?.securitySwitched(touchID.on, sender: self)
     }
     
     func preferredFontChange(){
