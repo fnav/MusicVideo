@@ -10,7 +10,7 @@ import Foundation
 
 class Video{
     
-    
+    //Struct with the API paths
     private struct APIVideoConstants{
           static let imageName = "im:name/label"
           static let rights = "rights/label"
@@ -23,10 +23,21 @@ class Video{
           static let linkToiTunes = "id/label"
           static let releaseDate = "im:releaseDate/attributes/label"
     }
-    //Data encapsulation
     
+    //Public vars
+    
+    //save video rank in iTunes
     var vRank = 0
     
+    //Image quality. If user doesn't set, put low
+    private var _vImageQuality:ImageQualityType = ImageQualityType.best{
+        didSet{
+            //Everytime _imageQuality is setted we'll change the _vImageUrl size
+            _vImageUrl = _vImageUrl.stringByReplacingOccurrencesOfString(oldValue.description, withString: _vImageQuality.description)
+        }
+    }
+    
+    //Private vars
     private var _vName:String
     private var _vRights:String
     private var _vPrice:String
@@ -83,6 +94,16 @@ class Video{
         return _vReleaseDte
     }
     
+    //vImageQuality allow access to _vImageQuality from instance
+    var vImageQuality:ImageQualityType{
+        set{
+            _vImageQuality = newValue
+        }
+        get{
+            return _vImageQuality
+        }
+    }
+    
     
     class func retrieveValueFromChain(chain:String, data:AnyObject)->String{
         
@@ -126,7 +147,9 @@ class Video{
         _vName = Video.retrieveValueFromChain(APIVideoConstants.imageName, data: datos)
         //set imageURL
         let imageUrl = Video.retrieveValueFromChain(APIVideoConstants.imageURL, data: data)
-        _vImageUrl = imageUrl.stringByReplacingOccurrencesOfString("100x100", withString: "600x600")
+            //We'll put the size that MusicVideoBrain specify at the moment we load _vImage Url
+        let imageSize = imageQuality.description
+        _vImageUrl = imageUrl.stringByReplacingOccurrencesOfString("100x100", withString:imageSize)
         //set videoURL
         _vVideoUrl = Video.retrieveValueFromChain(APIVideoConstants.videoURL, data: data)
         
@@ -141,7 +164,9 @@ class Video{
         
     }
     
-    
+    deinit{
+      //  print("Video with rank:\(vRank) called \(_vName) deallocated")
+    }
     
     
 }

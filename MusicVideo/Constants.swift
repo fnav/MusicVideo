@@ -12,19 +12,13 @@ typealias JSONDictionary = [String: AnyObject]
 
 typealias JSONArray = Array <AnyObject>
 
-public struct MVideoAPI {
-    //Max 200
-    static let maxNumVideos = 200
-    static let defaultLimitVideoCnt = 10
-    static var topMusicVideos = "https://itunes.apple.com/us/rss/topmusicvideos"
-
-}
 
 public struct NSUserDefaultsKeys{
     static let securitySettings = "SecSettings"
     static let apiCNT = "APICNT"
     static let bestImageQuality = "QualitySettings"
 }
+
 
 enum InternetStatus: CustomStringConvertible{
     case WIFI
@@ -42,6 +36,26 @@ enum InternetStatus: CustomStringConvertible{
                     return "Cellular Access Available"
                 }
             }
+        
+    }
+}
+
+enum ImageQualityType: String,CustomStringConvertible{
+    case low = "low"
+    case medium = "medium"
+    case best = "best"
+    
+    var description: String{
+        get {
+            switch self {
+            case .low:
+                return "100x100"
+            case .medium:
+                return "300x300"
+            case .best:
+                return "600x600"
+            }
+        }
         
     }
 }

@@ -1,30 +1,41 @@
 //
-//  MusicVideoBrain.swift
+//  MusicVideoDefaults.swift
 //  MusicVideo
 //
-//  Created by Francisco Navarro Madueño on 09/04/16.
+//  Created by Francisco Navarro Madueño on 17/04/16.
 //  Copyright © 2016 Francisco Navarro Madueño. All rights reserved.
 //
 
 import Foundation
 
-private let sharedBrain = MusicVideoBrain()
+private let sharedBrainDefaults = MusicVideoDefaults()
 
-class MusicVideoBrain {
+
+class MusicVideoDefaults {
     
-    class var sharedInstance: MusicVideoBrain {
-        return sharedBrain
+    
+    //MARK: -
+    //MARK: Singleton
+    class var sharedInstance: MusicVideoDefaults {
+        return sharedBrainDefaults
+    }
+    //MARK: -
+    
+    private struct MVideoAPI {
+        //Max 200
+        static let maxNumVideos = 200
+        static let defaultLimitVideoCnt = 10
+        static var topMusicVideos = "https://itunes.apple.com/us/rss/topmusicvideos"
+        
     }
     
-    enum ImageQualityType: String{
-        case low = "low"
-        case medium = "medium"
-        case best = "best"
-    }
+    //Private vars
     
     private var _limit:Int?
-    private var _imageQuality:ImageQualityType?
+    
     private var _securityEnabled:Bool?
+    
+    //Public vars
     
     private let defaults = NSUserDefaults.standardUserDefaults()
     
@@ -37,7 +48,6 @@ class MusicVideoBrain {
             return defaults.boolForKey(NSUserDefaultsKeys.securitySettings)
         }
     }
-    
     
     var bestQuality:Bool{
         set{
@@ -82,6 +92,4 @@ class MusicVideoBrain {
         
     }
 
-    
 }
-

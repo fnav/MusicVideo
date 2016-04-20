@@ -15,7 +15,7 @@ import LocalAuthentication
 class MusicVideoDetailVC: UIViewController {
 
     var video:Video!
-    var securitySwitch:Bool = false
+    var musicVideoDefaults = MusicVideoDefaults.sharedInstance
 
     
     //MARK: Outlets
@@ -73,7 +73,8 @@ class MusicVideoDetailVC: UIViewController {
     }
 
     @IBAction func socialMedia(sender: UIBarButtonItem) {
-        securitySwitch = NSUserDefaults.standardUserDefaults().boolForKey(NSUserDefaultsKeys.securitySettings)
+       
+        let securitySwitch = self.musicVideoDefaults.security
         
         switch securitySwitch {
         case true:
@@ -84,10 +85,6 @@ class MusicVideoDetailVC: UIViewController {
     }
     
     func touchIdChk() {
-        
-        // Create an alert
-        let alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "continue", style: UIAlertActionStyle.Cancel, handler: nil))
         
         
         // Create the Local Authentication Context
@@ -107,6 +104,10 @@ class MusicVideoDetailVC: UIViewController {
                     }
                 } else {
                     
+                    // Create an alert
+                    let alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "continue", style: UIAlertActionStyle.Cancel, handler: nil))
+
                     alert.title = "Unsuccessful!"
                     
                     switch LAError(rawValue: policyError!.code)! {
@@ -145,7 +146,10 @@ class MusicVideoDetailVC: UIViewController {
             })
         } else {
             // Unable to access local device authentication
-            
+            // Create an alert
+            let alert = UIAlertController(title: "", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "continue", style: UIAlertActionStyle.Cancel, handler: nil))
+
             // Set the error title
             alert.title = "Error"
             
