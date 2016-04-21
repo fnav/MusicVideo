@@ -36,6 +36,7 @@ class Video{
             switch newValue {
             case .medium:
                 if(_vImageQuality.rawValue == ImageQualityType.low.rawValue){
+                    //From .low to .medium
                     //If we have already the photo saved with a good quality we don't want to reset de data.
                     if(_vImageData?.quality.rawValue == ImageQualityType.low.rawValue){
                         vImageData = nil
@@ -45,6 +46,7 @@ class Video{
                 _vImageUrl = _vImageUrl.stringByReplacingOccurrencesOfString(_vImageQuality.description, withString: newValue.description)
             case .best:
                 if(_vImageQuality.rawValue == ImageQualityType.low.rawValue || _vImageQuality.rawValue == ImageQualityType.medium.rawValue){
+                    //From .low or .medium to .best
                     //If we have already the photo saved with a good quality we don't want to reset de data.
                     if(_vImageData?.quality.rawValue != ImageQualityType.best.rawValue){
                         vImageData = nil
@@ -73,10 +75,10 @@ class Video{
     
     // This variable gets created from the UI
     //private _vImageData will be use to store the qualityType of the NSData aldready loaded
-    private var _vImageData:(data:NSData,quality:ImageQualityType)?
+    private var _vImageData:(data:NSData?,quality:ImageQualityType)?
     var vImageData:NSData?{
         didSet{
-            _vImageData = (vImageData!,_vImageQuality)
+            _vImageData = (vImageData,_vImageQuality)
         }
     }
     
