@@ -29,11 +29,33 @@ class Video{
     //save video rank in iTunes
     var vRank = 0
     
-    //Image quality. If user doesn't set, put low
-    private var _vImageQuality:ImageQualityType = ImageQualityType.best{
-        didSet{
-            //Everytime _imageQuality is setted we'll change the _vImageUrl size
-            _vImageUrl = _vImageUrl.stringByReplacingOccurrencesOfString(oldValue.description, withString: _vImageQuality.description)
+    //Image quality for videos. Get initial value from imageQuality in ViewController
+    private var _vImageQuality:ImageQualityType = imageQuality{
+        willSet{
+            //If image quality is better than before we'll force the reload putting vImageData to nil
+            switch newValue {
+            case .medium:
+                if(_vImageQuality.rawValue == ImageQualityType.low.rawValue){
+                    //If we have already the photo saved with a good quality we don't want to reset de data.
+                    if(_vImageData?.quality.rawValue == ImageQualityType.low.rawValue){
+                        vImageData = nil
+                    }
+                }
+                //Change the imageURL for future loads
+                _vImageUrl = _vImageUrl.stringByReplacingOccurrencesOfString(_vImageQuality.description, withString: newValue.description)
+            case .best:
+                if(_vImageQuality.rawValue == ImageQualityType.low.rawValue || _vImageQuality.rawValue == ImageQualityType.medium.rawValue){
+                    //If we have already the photo saved with a good quality we don't want to reset de data.
+                    if(_vImageData?.quality.rawValue != ImageQualityType.best.rawValue){
+                        vImageData = nil
+                    }
+                }
+                _vImageUrl = _vImageUrl.stringByReplacingOccurrencesOfString(_vImageQuality.description, withString: newValue.description)
+            default:
+                //Everytime _imageQuality is setted we'll change the _vImageUrl size
+                _vImageUrl = _vImageUrl.stringByReplacingOccurrencesOfString(_vImageQuality.description, withString: newValue.description)
+            }
+
         }
     }
     
@@ -50,7 +72,13 @@ class Video{
     private var _vReleaseDte:String
     
     // This variable gets created from the UI
-    var vImageData:NSData?
+    //private _vImageData will be use to store the qualityType of the NSData aldready loaded
+    private var _vImageData:(data:NSData,quality:ImageQualityType)?
+    var vImageData:NSData?{
+        didSet{
+            _vImageData = (vImageData!,_vImageQuality)
+        }
+    }
     
     //Make a getter
     
@@ -148,8 +176,7 @@ class Video{
         //set imageURL
         let imageUrl = Video.retrieveValueFromChain(APIVideoConstants.imageURL, data: data)
             //We'll put the size that MusicVideoBrain specify at the moment we load _vImage Url
-        let imageSize = imageQuality.description
-        _vImageUrl = imageUrl.stringByReplacingOccurrencesOfString("100x100", withString:imageSize)
+        _vImageUrl = imageUrl.stringByReplacingOccurrencesOfString("100x100", withString:_vImageQuality.description)
         //set videoURL
         _vVideoUrl = Video.retrieveValueFromChain(APIVideoConstants.videoURL, data: data)
         
