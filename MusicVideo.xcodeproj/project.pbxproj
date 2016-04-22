@@ -21,6 +21,7 @@
 		A18A8B7D1C9334CF00FEBBDF /* MusicVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18A8B7C1C9334CF00FEBBDF /* MusicVideo.swift */; };
 		A18C0AE91CAC18BD00799AB4 /* MusicVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18C0AE81CAC18BD00799AB4 /* MusicVideoTableViewCell.swift */; };
 		A198C11B1CB18C8500F45803 /* SettingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198C11A1CB18C8500F45803 /* SettingsTVC.swift */; };
+		A1DD9CA11CCAC62A0041EB97 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1DD9CA01CCAC62A0041EB97 /* LocalAuthentication.framework */; };
 		A1E496841CC40F9000C85C9B /* MusicVideoDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E496831CC40F9000C85C9B /* MusicVideoDefaults.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		A18A8B7C1C9334CF00FEBBDF /* MusicVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicVideo.swift; sourceTree = "<group>"; };
 		A18C0AE81CAC18BD00799AB4 /* MusicVideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicVideoTableViewCell.swift; sourceTree = "<group>"; };
 		A198C11A1CB18C8500F45803 /* SettingsTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVC.swift; sourceTree = "<group>"; };
+		A1DD9CA01CCAC62A0041EB97 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		A1E496831CC40F9000C85C9B /* MusicVideoDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicVideoDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1DD9CA11CCAC62A0041EB97 /* LocalAuthentication.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +199,7 @@
 		A18A8B791C93336E00FEBBDF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A1DD9CA01CCAC62A0041EB97 /* LocalAuthentication.framework */,
 				A18A8B7A1C93338E00FEBBDF /* Constants.swift */,
 			);
 			name = Utils;

@@ -9,6 +9,8 @@
 import UIKit
 import MessageUI
 
+import LocalAuthentication
+
 
 protocol SettingsTVCDataSource: class {
     func sliderCnt(cnt: Int,sender: SettingsTVC)
@@ -34,6 +36,7 @@ class SettingsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
     var touchIDisOn:Bool?
     var imageBestQualityisOn:Bool?
     var sliderCnt:Float?
+    var touchIDAvailable:Bool=true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,13 +53,18 @@ class SettingsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
         sliderCount.value = (sliderCnt ?? 10.0)
         APICnt.text = "\(Int(sliderCount.value))"
         
-//        touchID.on = NSUserDefaults.standardUserDefaults().boolForKey(NSUserDefaultsKeys.securitySettings)
-//        if let theValue = NSUserDefaults.standardUserDefaults().objectForKey(NSUserDefaultsKeys.apiCNT){
-//            APICnt.text = "\(theValue)"
-//            sliderCount.value = Float(theValue as! NSNumber)
-//        }
+        // Check if the device has a fingerprint sensor and save it in a var called touchIDAvailable
+        // 1. Create a authentication context
+        let authenticationContext = LAContext()
         
-        
+        var error:NSError?
+
+        guard authenticationContext.canEvaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, error: &error) else {
+            
+            touchIDAvailable = false
+            return
+            
+        }
     }
     
     @IBAction func finishedSliderValueChanged(sender: UISlider) {
@@ -147,7 +155,23 @@ class SettingsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
         self.presentViewController(alertController, animated: true, completion: nil)
         
     }
+    
+    //MARK: -
+    //MARK: Table view data methods
+    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if(section == 1){
+            if(!self.touchIDAvailable){
+                self.touchID.enabled = false
+                return "Sorry, touch ID is not available in current device"
+            }else{
+                return nil
+            }
+        }else{
+            return nil
+        }
+    }
 
+    //MARK: -
 
     
     // Is called just as the object is about to be deallocated

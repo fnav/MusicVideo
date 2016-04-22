@@ -220,8 +220,6 @@ class MusicVideoDetailVC: UIViewController {
         }
         
         self.presentViewController(activityViewController, animated: true, completion: nil)
-        
-        
     }
     
     /*
