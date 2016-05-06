@@ -8,26 +8,31 @@
 
 import Foundation
 
+//We don't want anybody using different instances
 private let sharedBrainDefaults = MusicVideoDefaults()
 
 
 class MusicVideoDefaults {
     
-    
-    //MARK: -
-    //MARK: Singleton
+    //Singleton
     class var sharedInstance: MusicVideoDefaults {
         return sharedBrainDefaults
     }
-    //MARK: -
     
+    //MARK: Structs
+    
+    //Music video api default values
     private struct MVideoAPI {
-        //Max 200
+        //maximun number of videos to fetch
         static let maxNumVideos = 200
+        //default value for the first time you execute the app
         static let defaultLimitVideoCnt = 10
+        //top music video url
         static var topMusicVideos = "https://itunes.apple.com/us/rss/topmusicvideos"
         
     }
+    
+    //MARK: Private parameters
     
     //Private vars
     
@@ -35,10 +40,11 @@ class MusicVideoDefaults {
     
     private var _securityEnabled:Bool?
     
-    //Public vars
-    
     private let defaults = NSUserDefaults.standardUserDefaults()
     
+    //MARK: Private parameters
+    
+    //Security for touch ID
     var security:Bool{
         set{
             let defaults = NSUserDefaults.standardUserDefaults()
@@ -49,6 +55,7 @@ class MusicVideoDefaults {
         }
     }
     
+    //Best quality for videos images
     var bestQuality:Bool{
         set{
             let defaults = NSUserDefaults.standardUserDefaults()
@@ -59,9 +66,11 @@ class MusicVideoDefaults {
         }
     }
     
+    //number of videos to request
     var limit:Int{
         set{
             if(_limit != newValue){
+                //Make sure the value added is not greater than max number
                 if(newValue>MVideoAPI.maxNumVideos){
                     print("Limite puesto a \(newValue>MVideoAPI.maxNumVideos) por defecto")
                     _limit = MVideoAPI.maxNumVideos
@@ -75,7 +84,7 @@ class MusicVideoDefaults {
         }
         get{
             var limitNum = 0
-            //If it's the first time limit is accesed try get from NSUserDefaults. If not, set a default value from MusicVideoAPIConstants
+            //If it's the first time limit is accesed try get from NSUserDefaults. If not, get a default value from MVideoAPI struct
             if let limitCnt = _limit{
                 limitNum = limitCnt
             }else{
