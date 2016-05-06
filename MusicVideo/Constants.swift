@@ -8,11 +8,11 @@
 
 import Foundation
 
+//we'll use JSONDictionary and JSONArray for storin json data from apple api server
 typealias JSONDictionary = [String: AnyObject]
-
 typealias JSONArray = Array <AnyObject>
 
-
+//Values you have to use if you want to get something from MusicVideoDefaults class
 public struct NSUserDefaultsKeys{
     static let securitySettings = "SecSettings"
     static let apiCNT = "APICNT"
@@ -20,6 +20,7 @@ public struct NSUserDefaultsKeys{
 }
 
 
+//Possible values for internet status
 enum InternetStatus: CustomStringConvertible{
     case WIFI
     case NOACCESS
@@ -39,6 +40,8 @@ enum InternetStatus: CustomStringConvertible{
         
     }
 }
+
+//Possible values for internet status
 
 enum ImageQualityType: String,CustomStringConvertible{
     case low = "low"
