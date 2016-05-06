@@ -14,7 +14,6 @@ import LocalAuthentication
 
 protocol SettingsTVCDataSource: class {
     func sliderCnt(cnt: Int,sender: SettingsTVC)
-    
     func securitySwitched(isOn:Bool,sender:SettingsTVC)
     func qualityImageSwitched(isHigh:Bool,sender:SettingsTVC)
 }
