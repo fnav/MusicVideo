@@ -10,16 +10,22 @@ import UIKit
 
 class MusicVideoTableViewCell: UITableViewCell {
     
+    //MARK: Outlets
     
+    @IBOutlet weak var musicImage: UIImageView!
+    @IBOutlet weak var rank: UILabel!
+    @IBOutlet weak var musicTitle: UILabel!
+    
+    //MARK: Parameters
+    
+    //It's really important to set this var in order to make the cell work
     var video: Video?{
         didSet{
             updateCell()
         }
     }
-
-    @IBOutlet weak var musicImage: UIImageView!
-    @IBOutlet weak var rank: UILabel!
-    @IBOutlet weak var musicTitle: UILabel!
+    
+    //MARK: MusicVideoCell methods
     
     func updateCell() {
         

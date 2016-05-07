@@ -9,15 +9,13 @@
 import Foundation
 
 //We don't want anybody using different instances
-private let sharedBrainDefaults = MusicVideoDefaults()
-
 
 class MusicVideoDefaults {
     
-    //Singleton
-    class var sharedInstance: MusicVideoDefaults {
-        return sharedBrainDefaults
-    }
+    //Michael comment: "Using static class member and marking the init as private will make sure the singleton is wrapped in dispatch_once blocks behind the scenes."
+    static let sharedInstance = MusicVideoDefaults()
+    
+    private init() {} //This prevents others from using the default() initializer for this class.
     
     //MARK: Structs
     
