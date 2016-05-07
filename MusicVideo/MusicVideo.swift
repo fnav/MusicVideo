@@ -10,7 +10,8 @@ import Foundation
 
 class Video{
     
-    //Struct with the API paths
+    //MARK: Structs
+    //Struct with the API paths. It just indicates the path to find the necessary information
     private struct APIVideoConstants{
           static let imageName = "im:name/label"
           static let rights = "rights/label"
@@ -24,12 +25,11 @@ class Video{
           static let releaseDate = "im:releaseDate/attributes/label"
     }
     
-    //Public vars
-    
-    //save video rank in iTunes
-    var vRank = 0
-    
-    //Image quality for videos. Get initial value from imageQuality in ViewController
+    //MARK: -
+    //MARK: Private parameters
+
+       //Image quality for videos. Get initial value from imageQuality in ViewController.
+    //Everytime _vImageQuality is set we want to make sure _vImageUrl and vImageData is updated based on internet status
     private var _vImageQuality:ImageQualityType = imageQuality{
         willSet{
             //If image quality is better than before we'll force the reload putting vImageData to nil
@@ -76,11 +76,14 @@ class Video{
     // This variable gets created from the UI
     //private _vImageData will be use to store the qualityType of the NSData aldready loaded
     private var _vImageData:(data:NSData?,quality:ImageQualityType)?
-    var vImageData:NSData?{
-        didSet{
-            _vImageData = (vImageData,_vImageQuality)
-        }
-    }
+ 
+    //MARK: -
+
+    //Public vars
+    //MARK: Public parameters
+    
+    //save video rank in iTunes
+    var vRank = 0
     
     //Make a getter
     
@@ -134,7 +137,22 @@ class Video{
         }
     }
     
+    var vImageData:NSData?{
+        didSet{
+            _vImageData = (vImageData,_vImageQuality)
+        }
+    }
     
+    //MARK: -
+    //MARK: Class methods
+    
+    /*
+     You don't need to know the logic of retrieveValueFromChain. It receives two values:
+     - chain: a path where the data is located. For example: "im:releaseDate/attributes/label"
+     - data: is the data where the method is suppose to find the data indicated in chain
+     
+     It returns the string value (if located) and empty string value (if not)
+     */
     class func retrieveValueFromChain(chain:String, data:AnyObject)->String{
         
         var stringValue = ""
@@ -168,7 +186,9 @@ class Video{
         
         return stringValue
     }
-
+    
+    //MARK: -
+    //MARK: Music Video Methods
     
     init (data: JSONDictionary){
         

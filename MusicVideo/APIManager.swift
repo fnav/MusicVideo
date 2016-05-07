@@ -11,14 +11,15 @@ import Foundation
 
 class APIManager {
 
-    
+    //MARK: APIManager methods
+    //you pass the url with urlString and the completion for calling then data is loaded
     func loadData(urlString:String, completion: (result:[Video])->Void){
         
-        //config va a evitar que se guarden cosas en la cache
+        //congig avoid to store data in cache
         let config = NSURLSessionConfiguration.ephemeralSessionConfiguration()
         
         let session = NSURLSession(configuration: config)
-        
+        //unwrapped url
         let url = NSURL(string: urlString)!
         
         //dataTaskWithURL se llevará a cabo en segundo plano (no en el hilo principal)-> de ahí que cuando nos de los datos tengamos que volver al hilo principal

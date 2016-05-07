@@ -13,10 +13,11 @@ import Foundation
 class MusicVideoDefaults {
     
     //Michael comment: "Using static class member and marking the init as private will make sure the singleton is wrapped in dispatch_once blocks behind the scenes."
+    //MARK: Singleton
     static let sharedInstance = MusicVideoDefaults()
     
     private init() {} //This prevents others from using the default() initializer for this class.
-    
+    //MARK: -
     //MARK: Structs
     
     //Music video api default values
@@ -30,6 +31,7 @@ class MusicVideoDefaults {
         
     }
     
+    //MARK: -
     //MARK: Private parameters
     
     //Private vars
@@ -39,7 +41,8 @@ class MusicVideoDefaults {
     private var _securityEnabled:Bool?
     
     private let defaults = NSUserDefaults.standardUserDefaults()
-    
+   
+    //MARK: -
     //MARK: Private parameters
     
     //Security for touch ID

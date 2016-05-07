@@ -13,7 +13,9 @@ import LocalAuthentication
 
 
 class MusicVideoDetailVC: UIViewController {
+    //MARK: -
 
+    //MARK: Parameters
     var video:Video!
     var musicVideoDefaults = MusicVideoDefaults.sharedInstance
 
@@ -55,6 +57,9 @@ class MusicVideoDetailVC: UIViewController {
        
     }
     
+    //MARK: - 
+    //MARK: IBActions
+    
     @IBAction func playVideo(sender: UIBarButtonItem) {
         
         let url = NSURL(string: video.vVideoUrl)!
@@ -73,7 +78,8 @@ class MusicVideoDetailVC: UIViewController {
     }
 
     @IBAction func socialMedia(sender: UIBarButtonItem) {
-       
+        
+       //We want our user share the content of the video if security swich is not set. If it's set the user have to use touch ID.
         let securitySwitch = self.musicVideoDefaults.security
         
         switch securitySwitch {
@@ -85,7 +91,6 @@ class MusicVideoDetailVC: UIViewController {
     }
     
     func touchIdChk() {
-        
         
         // Create the Local Authentication Context
         let context = LAContext()
@@ -181,7 +186,7 @@ class MusicVideoDetailVC: UIViewController {
         
     }
     
-    
+    //Pops up an activityViewController in order to share video content
     func shareMedia() {
         
         let activity1 = "Have you had the opportunity to see this Music Video?"

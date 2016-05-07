@@ -10,11 +10,16 @@ import UIKit
 
 class MusicVideoTableViewCell: UITableViewCell {
     
+    //MARK: -
+
+    
     //MARK: Outlets
     
     @IBOutlet weak var musicImage: UIImageView!
     @IBOutlet weak var rank: UILabel!
     @IBOutlet weak var musicTitle: UILabel!
+    
+    //MARK: -
     
     //MARK: Parameters
     
@@ -25,8 +30,11 @@ class MusicVideoTableViewCell: UITableViewCell {
         }
     }
     
+    //MARK: -
+    
     //MARK: MusicVideoCell methods
     
+    //we'll fill cell data with the information passed in video instance
     func updateCell() {
         
         musicTitle.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
@@ -35,7 +43,7 @@ class MusicVideoTableViewCell: UITableViewCell {
         musicTitle.text = video?.vName
         rank.text = ("\(video!.vRank)")
         
-        //musicImage.image = UIImage(named:"imageNotAvailable")
+        //if vImageData is not nil we don't need to look it up through internet
         if video!.vImageData != nil {
             print("Get data from array ...")
             musicImage.image = UIImage(data: video!.vImageData!)
@@ -48,6 +56,7 @@ class MusicVideoTableViewCell: UITableViewCell {
         
     }
     
+    //we download image data from internet (in background)
     func getVideoImage(video:Video,imageView:UIImageView){
         // Background thread
         //  DISPATCH_QUEUE_PRIORITY_HIGH Items dispatched to the queue will run at high priority, i.e. the queue will be scheduled for execution before any default priority or low priority queue.
@@ -57,6 +66,8 @@ class MusicVideoTableViewCell: UITableViewCell {
         //  DISPATCH_QUEUE_PRIORITY_LOW Items dispatched to the queue will run at low priority, i.e. the queue will be scheduled for execution after all default priority and high priority queues have been scheduled.
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             
+            
+            //when data is ready we update it in our video class
             let data = NSData(contentsOfURL: NSURL(string: video.vImageUrl)!)
             
             var image : UIImage?
@@ -65,7 +76,7 @@ class MusicVideoTableViewCell: UITableViewCell {
                 image = UIImage(data: data!)
             }
             
-            // move back to Main Queue
+            // move back to Main Queue as IU is implied
             dispatch_async(dispatch_get_main_queue()) {
                 imageView.image = image
             }

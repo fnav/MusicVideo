@@ -50,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         default:return
         }
         
+        //We'll notify an internet status change to everyone is listenting to us
         NSNotificationCenter.defaultCenter().postNotificationName("ReachStatusChanged", object: nil)
         
     }

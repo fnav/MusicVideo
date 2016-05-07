@@ -302,7 +302,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: UITableViewDelegate
    
-    //MARK: -
 
     //MARK: - Navigation
     
