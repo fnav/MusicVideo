@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A11A47C71CAFD57F00FCE961 /* MusicVideoDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11A47C61CAFD57F00FCE961 /* MusicVideoDetailVC.swift */; };
 		A1246ED31C95F8A0005811B6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A1246ED21C95F8A0005811B6 /* Reachability.m */; };
+		A136F1841CDF47470032D118 /* JsonDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A136F1831CDF47470032D118 /* JsonDataExtractor.swift */; };
 		A16FF5891C91C67900F8A5A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16FF5881C91C67900F8A5A7 /* AppDelegate.swift */; };
 		A16FF58B1C91C67900F8A5A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16FF58A1C91C67900F8A5A7 /* ViewController.swift */; };
 		A16FF58E1C91C67900F8A5A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A16FF58C1C91C67900F8A5A7 /* Main.storyboard */; };
@@ -47,6 +48,7 @@
 		A1246ED01C95F89F005811B6 /* MusicVideo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MusicVideo-Bridging-Header.h"; sourceTree = "<group>"; };
 		A1246ED11C95F8A0005811B6 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		A1246ED21C95F8A0005811B6 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		A136F1831CDF47470032D118 /* JsonDataExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonDataExtractor.swift; sourceTree = "<group>"; };
 		A16FF5851C91C67800F8A5A7 /* MusicVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A16FF5881C91C67900F8A5A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A16FF58A1C91C67900F8A5A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				A16FF5BA1C91CE5500F8A5A7 /* APIManager.swift */,
 				A18A8B7C1C9334CF00FEBBDF /* MusicVideo.swift */,
 				A1E496831CC40F9000C85C9B /* MusicVideoDefaults.swift */,
+				A136F1831CDF47470032D118 /* JsonDataExtractor.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				A198C11B1CB18C8500F45803 /* SettingsTVC.swift in Sources */,
 				A16FF58B1C91C67900F8A5A7 /* ViewController.swift in Sources */,
 				A18A8B7D1C9334CF00FEBBDF /* MusicVideo.swift in Sources */,
+				A136F1841CDF47470032D118 /* JsonDataExtractor.swift in Sources */,
 				A16FF5891C91C67900F8A5A7 /* AppDelegate.swift in Sources */,
 				A1246ED31C95F8A0005811B6 /* Reachability.m in Sources */,
 				A18C0AE91CAC18BD00799AB4 /* MusicVideoTableViewCell.swift in Sources */,

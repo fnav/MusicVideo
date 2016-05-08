@@ -44,8 +44,16 @@ class SettingsTVC: UITableViewController, MFMailComposeViewControllerDelegate {
         
         self.title = "Settings"
         
+        #if swift(>=2.2)
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.preferredFontChange), name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        #else
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "preferredFontChange", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        #endif
         
+
+        
+            
         //Settings initial parameters
         touchID.on = touchIDisOn ?? false
         bestImage.on = imageBestQualityisOn ?? false
